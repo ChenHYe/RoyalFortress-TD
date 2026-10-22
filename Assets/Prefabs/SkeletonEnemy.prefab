@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3185768765985153474
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4854563957346315790, guid: 23404ed50143dca47ae2b8b7480cab51, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4854563957346315790, guid: 23404ed50143dca47ae2b8b7480cab51, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4854563957346315790, guid: 23404ed50143dca47ae2b8b7480cab51, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4854563957346315790, guid: 23404ed50143dca47ae2b8b7480cab51, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4854563957346315790, guid: 23404ed50143dca47ae2b8b7480cab51, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4854563957346315790, guid: 23404ed50143dca47ae2b8b7480cab51, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4854563957346315790, guid: 23404ed50143dca47ae2b8b7480cab51, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4854563957346315790, guid: 23404ed50143dca47ae2b8b7480cab51, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4854563957346315790, guid: 23404ed50143dca47ae2b8b7480cab51, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4854563957346315790, guid: 23404ed50143dca47ae2b8b7480cab51, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8466298025853186951, guid: 23404ed50143dca47ae2b8b7480cab51, type: 3}
+      propertyPath: m_Name
+      value: SkeletonEnemy
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8466298025853186951, guid: 23404ed50143dca47ae2b8b7480cab51, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4178104704550137787}
+    - targetCorrespondingSourceObject: {fileID: 8466298025853186951, guid: 23404ed50143dca47ae2b8b7480cab51, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6287977601848039974}
+    - targetCorrespondingSourceObject: {fileID: 8466298025853186951, guid: 23404ed50143dca47ae2b8b7480cab51, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1647448763412666705}
+  m_SourcePrefab: {fileID: 100100000, guid: 23404ed50143dca47ae2b8b7480cab51, type: 3}
+--- !u!1 &6433474406122885701 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8466298025853186951, guid: 23404ed50143dca47ae2b8b7480cab51, type: 3}
+  m_PrefabInstance: {fileID: 3185768765985153474}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4178104704550137787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6433474406122885701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e09ef9e20f333c42be7c0ab1de37492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaypointEnemy
+  definition: {fileID: 11400000, guid: 0d0f54b92dc5d03478560178d6730e8f, type: 2}
+  moveSpeed: 1.35
+  maxHealth: 125
+  armorPercent: 15
+--- !u!114 &6287977601848039974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6433474406122885701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7438eef83eab6514f9d068c7830ee51d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KingdomBorder.TwinTowers.EnemyAgent
+  maxHealth: 125
+  armorPercent: 15
+  baseSpeed: 1.55
+  body: {fileID: 8245167363271756701}
+  destroyOnDeath: 1
+--- !u!114 &1647448763412666705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6433474406122885701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fb12252e7e1b2d44a35b4f53d493a33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FortressEnemyVisual
+--- !u!212 &8245167363271756701 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6798931135375174239, guid: 23404ed50143dca47ae2b8b7480cab51, type: 3}
+  m_PrefabInstance: {fileID: 3185768765985153474}
+  m_PrefabAsset: {fileID: 0}

@@ -1,0 +1,9 @@
+PASS: independent health/armor/speed/base damage/undead definitions; four animation directions for both; orc physical40=16 magic40=34; 45% slow speed0.396.
+PASS: real animation changes sprites; health bar shrinks after damage; death resolves enemy and hides bar.
+PASS: death corpses removed after fade.
+PASS: wave1 4 skeletons killed, lives20.
+PASS: wave2 4 skeletons + 2 orcs killed; cumulative kills10, lives20.
+PASS: natural Update three-wave victory: 13 skeletons+5 orcs killed, alive0, leaks0, lives20; branch C included.
+PASS: 10 orcs naturally reach exit, exactly 2 life each, lives0, failure, no kills, alive0.
+PASS: failure restart restores 3 mixed waves, lives20, counters0, empty sites and registry. Final independent orc prefab starts with orc sprite; four 0.8-second animation clips.
+Verification used CLI assertions and natural Update loops; no standalone build or manual mouse acceptance.
