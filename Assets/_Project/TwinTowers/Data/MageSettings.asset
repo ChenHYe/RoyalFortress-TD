@@ -21,4 +21,5 @@ MonoBehaviour:
   armorPenetration: 0.75
   slowFraction: 0
   slowDuration: 0
+  splashRadius: 0
   magicColor: {r: 0.78, g: 0.4, b: 1, a: 1}

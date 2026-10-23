@@ -13,6 +13,8 @@ public sealed class TowerBuildController : MonoBehaviour
     public BuildSite[] sites;
     public GameObject mageTowerPrefab;
     public GameObject frostTowerPrefab;
+    public GameObject arrowTowerPrefab;
+    public GameObject artilleryTowerPrefab;
     public Transform builtTowersRoot;
     public Canvas hudCanvas;
     public RectTransform menu;
@@ -41,10 +43,11 @@ public sealed class TowerBuildController : MonoBehaviour
     private void Awake()
     {
         mageButton.onClick.AddListener(BuildMage);
-        closeButton.onClick.AddListener(Cancel);
-        arrowButton.interactable = artilleryButton.interactable = false;
+        arrowButton.onClick.AddListener(BuildArrow);
+        artilleryButton.onClick.AddListener(BuildArtillery);
         frostButton.onClick.AddListener(BuildFrost);
-        frostButton.interactable = frostTowerPrefab != null;
+        closeButton.onClick.AddListener(Cancel);
+        RefreshButtonAvailability();
         menu.gameObject.SetActive(false);
     }
 
@@ -121,15 +124,25 @@ public sealed class TowerBuildController : MonoBehaviour
         selectedSite = site;
         selectedSite.Select(true);
         menuTitle.text = "建造防御塔 · " + site.siteLabel;
-        menuHint.text = "法师塔：穿甲飞弹；冰霜塔：范围减速";
-        mageButton.interactable = mageTowerPrefab != null;
-        frostButton.interactable = frostTowerPrefab != null;
+        menuHint.text = "箭塔：单体；投石：溅射；法师：穿甲；冰霜：减速";
+        RefreshButtonAvailability();
         menu.gameObject.SetActive(true);
         PositionMenu();
         return true;
     }
 
+    private void RefreshButtonAvailability()
+    {
+        mageButton.interactable = mageTowerPrefab != null;
+        frostButton.interactable = frostTowerPrefab != null;
+        arrowButton.interactable = arrowTowerPrefab != null;
+        artilleryButton.interactable = artilleryTowerPrefab != null;
+    }
+
     public void BuildFrost() { TryBuildFrost(); }
+    public void BuildMage() { TryBuildMage(); }
+    public void BuildArrow() { TryBuildArrow(); }
+    public void BuildArtillery() { TryBuildArtillery(); }
 
     public bool TryBuildFrost()
     {
@@ -139,12 +152,26 @@ public sealed class TowerBuildController : MonoBehaviour
         return true;
     }
 
-    public void BuildMage() { TryBuildMage(); }
-
     public bool TryBuildMage()
     {
         if (selectedSite == null || (game != null && game.IsGameOver)) return false;
         if (!selectedSite.TryBuild(mageTowerPrefab, builtTowersRoot)) return false;
+        Cancel();
+        return true;
+    }
+
+    public bool TryBuildArrow()
+    {
+        if (selectedSite == null || (game != null && game.IsGameOver)) return false;
+        if (!selectedSite.TryBuild(arrowTowerPrefab, builtTowersRoot)) return false;
+        Cancel();
+        return true;
+    }
+
+    public bool TryBuildArtillery()
+    {
+        if (selectedSite == null || (game != null && game.IsGameOver)) return false;
+        if (!selectedSite.TryBuild(artilleryTowerPrefab, builtTowersRoot)) return false;
         Cancel();
         return true;
     }
@@ -171,4 +198,3 @@ public sealed class TowerBuildController : MonoBehaviour
         menu.anchoredPosition = target;
     }
 }
-

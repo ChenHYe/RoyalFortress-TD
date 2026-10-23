@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace KingdomBorder.TwinTowers
 {
-    public enum TowerKind { Mage, Frost }
+    public enum TowerKind { Mage, Frost, Arrow, Artillery }
 
     [CreateAssetMenu(menuName = "Kingdom Border/双塔/塔参数", fileName = "TowerSettings")]
     public sealed class TowerDefinition : ScriptableObject
@@ -16,6 +16,7 @@ namespace KingdomBorder.TwinTowers
         [Range(0f, 1f), Tooltip("忽略的护甲比例。0.75 表示忽略 75% 护甲，不是额外增加 75% 伤害。")] public float armorPenetration = 0.75f;
         [Range(0f, 0.9f), Tooltip("减去的移动速度比例。0.45 表示减速 45%；最高 90%。")] public float slowFraction;
         [Min(0f), Tooltip("命中型临时减速的持续秒数。冰霜光环不使用此字段，圈内持续、出圈解除。")] public float slowDuration;
+        [Min(0f), Tooltip("投石塔溅射半径。0 表示仅命中主目标；命中点周围该半径内全部敌人受到同等伤害。")] public float splashRadius;
         public Color magicColor = new Color(0.8f, 0.5f, 1f);
 
         private void OnValidate()
@@ -27,6 +28,7 @@ namespace KingdomBorder.TwinTowers
             armorPenetration = Mathf.Clamp01(armorPenetration);
             slowFraction = Mathf.Clamp(slowFraction, 0, 0.9f);
             slowDuration = Mathf.Max(0, slowDuration);
+            splashRadius = Mathf.Max(0, splashRadius);
         }
     }
 }
