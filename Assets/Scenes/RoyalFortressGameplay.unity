@@ -256,7 +256,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 30973996}
   m_OnClick:
     m_PersistentCalls:
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.14901961, g: 0.1882353, b: 0.24313726, a: 1}
+  m_Color: {r: 0.36, g: 0.28, b: 0.16, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -479,7 +479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
   m_Material: {fileID: 0}
-  m_Color: {r: 0.627451, g: 0.67058825, b: 0.72156864, a: 1}
+  m_Color: {r: 0.9843137, g: 0.94509804, b: 0.8784314, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -499,7 +499,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.1
-  m_Text: "\u6295\u77F3\u5854\n\u672A\u5F00\u653E"
+  m_Text: "\u6295\u77F3\u5854 / \u5EFA\u9020"
 --- !u!222 &64242916
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1095,7 +1095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
   m_Material: {fileID: 0}
-  m_Color: {r: 0.627451, g: 0.67058825, b: 0.72156864, a: 1}
+  m_Color: {r: 0.9843137, g: 0.94509804, b: 0.8784314, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1115,7 +1115,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.1
-  m_Text: "\u7BAD\u5854\n\u672A\u5F00\u653E"
+  m_Text: "\u7BAD\u5854 / \u5EFA\u9020"
 --- !u!222 &283252916
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5136,7 +5136,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1021466717}
   m_OnClick:
     m_PersistentCalls:
@@ -5154,7 +5154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.14901961, g: 0.1882353, b: 0.24313726, a: 1}
+  m_Color: {r: 0.32, g: 0.3, b: 0.26, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5936,6 +5936,8 @@ MonoBehaviour:
   - {fileID: 2032204548}
   mageTowerPrefab: {fileID: 3245014155602382550, guid: 8aad2dd2764c40445808dcbe80e22d13, type: 3}
   frostTowerPrefab: {fileID: 6108834534539051913, guid: ef8d9cb951a9f1a4fab84acc8b2e8667, type: 3}
+  arrowTowerPrefab: {fileID: 3245014155602382560, guid: 5e4819bdeb8c4f26b6bee7c1230ad284, type: 3}
+  artilleryTowerPrefab: {fileID: 3245014155602382561, guid: 6255a2351a264fa7a398a13fb17c2a5b, type: 3}
   builtTowersRoot: {fileID: 2047668911}
   hudCanvas: {fileID: 571371297}
   menu: {fileID: 763443558}
@@ -7971,7 +7973,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u9009\u62E9\u5854\u7C7B\u578B\uFF1B\u5176\u4F59\u5854\u6682\u672A\u5F00\u653E"
+  m_Text: "\u9009\u62E9\u5854\u7C7B\u578B\uFF1B\u56DB\u5EA7\u57FA\u7840\u5854\u5747\u53EF\u5EFA\u9020"
 --- !u!222 &1527022720
 CanvasRenderer:
   m_ObjectHideFlags: 0

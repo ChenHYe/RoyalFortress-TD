@@ -19,6 +19,18 @@ namespace KingdomBorder.TwinTowers.Editor
             Selection.activeObject = AssetDatabase.LoadAssetAtPath<TowerDefinition>(Root + "/Data/MageSettings.asset");
             EditorGUIUtility.PingObject(Selection.activeObject);
         }
+        [MenuItem("Kingdom Border/双塔/查看箭塔参数")]
+        public static void ArrowSettings()
+        {
+            Selection.activeObject = AssetDatabase.LoadAssetAtPath<TowerDefinition>(Root + "/Data/ArrowSettings.asset");
+            EditorGUIUtility.PingObject(Selection.activeObject);
+        }
+        [MenuItem("Kingdom Border/双塔/查看投石塔参数")]
+        public static void ArtillerySettings()
+        {
+            Selection.activeObject = AssetDatabase.LoadAssetAtPath<TowerDefinition>(Root + "/Data/ArtillerySettings.asset");
+            EditorGUIUtility.PingObject(Selection.activeObject);
+        }
         [MenuItem("Kingdom Border/双塔/查看塔预制体")]
         public static void Prefabs()
         {
