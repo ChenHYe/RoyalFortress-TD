@@ -1,0 +1,60 @@
+金币与拖卡建造验证记录
+日期：2026-10-27
+
+悬浮UI与地图导航更新
+- 地图改为完整视口，顶部48单位状态条、底部紧凑半透明卡栏及右下角导航按钮悬浮显示。
+- 支持鼠标中心平滑缩放、地图边界约束、右键/中键拖图、键盘平移、Home复位。
+- Windows构建成功，扩展后的63项运行验收通过，包含三种实际窗口尺寸、
+  七坑位可达性、缩放锚点、边界、UI输入拦截、拖塔冻结相机及原有经济流程。
+- 编辑器补充操作缩放按钮，在约138%取景下平移并拖放法师塔成功，扣140金币正确。
+- 本次报告：../ReviewArtifacts/TowerEconomy/FloatingUIFinal/verification.json
+- 本次截图：../ReviewArtifacts/TowerEconomy/EditorCaptures/floating-ui-initial.png、
+            floating-ui-zoomed.png
+- 用户后续偏好：以开发实现为主，减少细致检查，优先交付可试玩版本。
+
+已通过
+- 使用 Unity 6000.3.27f1 自带 Roslyn，基于本机实际 Unity 程序集及工程依赖编译全部运行时代码。
+- 同样编译编辑器构建入口，无编译错误。旧双塔演示有三条已有的过时 API 警告。
+- 在 .NET 中运行真实编译后的 WaveGameController 方法，18 项经济逻辑检查通过：
+  准备阶段建造、按价扣款与通知、余额不足、负数请求、奖励入账、无效奖励、
+  恰好用完余额、空钱包拒绝、退回金额入账、胜负后禁止消费、战斗中消费、
+  实际击杀回调去重、实际漏怪回调扣血且不发钱、重复漏怪去重。
+  对象由反射创建以隔离 Unity 原生场景；没有使用替代 Unity API。
+- git diff --check 无格式错误。
+
+Unity 实机验收（同日补充）
+- 用户通过 Unity Hub 打开项目后，成功连接 Unity 6000.3.27f1 编辑器。
+- 实际进入 RoyalFortressGameplay 的 Play 模式，初始金币300、生命20、波次0。
+- Windows Development 独立程序构建成功。
+- 独立程序自动验收28项全部通过：四种卡片初始化、预览不扣费、UI区域取消、
+  取消后松手、法师扣140、投石扣160、占位拒绝、四卡余额不足禁用、
+  开波、自然移动、骷髅奖励18、兽人奖励40、击杀回调去重、
+  波次结束、漏怪扣血且不奖励、漏怪去重、重开重置。
+- 编辑器内补充合成拖放事件：四种塔覆盖全部7个坑位，全部建造成功，
+  合计扣840金币，余额正确。测试资金仅存在于Play状态，没有修改初始资金资产。
+- 已查看编辑器实际Game画面截图，确认顶部信息栏、四张塔卡、地图、
+  七座塔模型与冰霜光环显示正常。控制台未发现游戏编译或运行错误。
+- 测试后重载关卡，恢复300金币、20生命、0波次和空坑位，保留Play模式供试玩。
+
+验证边界
+- 输入通过合成UI事件和屏幕坐标驱动，没有执行真实系统鼠标或触摸设备自动化。
+- 未主动注入实例化异常验证退款路径，未验证其他平台及完整关卡平衡。
+- 隐藏窗口运行的独立程序截图为黑屏，因此视觉验收使用编辑器Game截图，
+  不将独立程序截图作为渲染成功的证据。
+- 之前批处理启动遇到Package Manager/许可证IPC错误；本次通过已打开编辑器完成构建。
+
+后续实际运行入口
+- 打开 Assets/Scenes/RoyalFortressGameplay.unity，点击 Play。
+- 编辑器命令行 -executeMethod FortressBuildVerification.Build 可构建验收程序。
+- 验收程序参数：
+  -fortress-smoke-test -fortress-test-output <输出目录>
+- 验收脚本会发送合成 UI 拖放事件，检查预览不扣钱、取消、无效位置、
+  已占用坑位、建塔扣费、余额不足、实际敌人受伤/击杀、波次、漏怪及重开，
+  并保存 JSON 和游戏截图；正常游戏中不会自动运行。
+
+工程外的本次编译文件、经济检查脚本和启动日志：
+../ReviewArtifacts/TowerEconomy/
+独立程序验收报告：Run1/verification.json（result=passed，28项）
+编辑器七坑位结果：editor-placement-checks.json
+实际Game截图：EditorCaptures/economy-initial.png、economy-drag.png、
+              economy-seven-towers.png

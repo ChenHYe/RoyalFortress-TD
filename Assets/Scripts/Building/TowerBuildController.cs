@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using KingdomBorder.TwinTowers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,190 +12,205 @@ public sealed class TowerBuildController : MonoBehaviour
     public Camera worldCamera;
     public WaveGameController game;
     public BuildSite[] sites;
-    public GameObject mageTowerPrefab;
-    public GameObject frostTowerPrefab;
-    public GameObject arrowTowerPrefab;
-    public GameObject artilleryTowerPrefab;
+    public GameObject mageTowerPrefab, frostTowerPrefab, arrowTowerPrefab, artilleryTowerPrefab;
     public Transform builtTowersRoot;
     public Canvas hudCanvas;
-    public RectTransform menu;
-    public Text menuTitle;
-    public Text menuHint;
-    public Button mageButton;
-    public Button arrowButton;
-    public Button artilleryButton;
-    public Button frostButton;
-    public Button closeButton;
-    private BuildSite selectedSite;
-    private BuildSite hoveredSite;
-    private readonly List<RaycastResult> uiHits = new List<RaycastResult>();
-    public BuildSite SelectedSite => selectedSite;
-    public bool MenuOpen => menu != null && menu.gameObject.activeSelf;
+    [Header("建造价格")]
+    [Min(1)] public int arrowCost = 90;
+    [Min(1)] public int frostCost = 110;
+    [Min(1)] public int mageCost = 140;
+    [Min(1)] public int artilleryCost = 160;
+    public bool IsDragging { get; private set; }
+    public BuildSite HoveredSite => hoveredSite;
+    public TowerKind DraggedKind { get; private set; }
     public int BuiltCount
     {
-        get
+        get { int count = 0; if (sites != null) foreach (var s in sites) if (s && s.IsOccupied) count++; return count; }
+    }
+    public event System.Action<string> PlacementMessage;
+    private readonly List<RaycastResult> uiHits = new List<RaycastResult>();
+    private BuildSite hoveredSite;
+    private GameObject preview;
+    private SpriteRenderer[] previewSprites;
+    private LineRenderer rangeRing;
+    private Vector2 dragPosition;
+    private bool purchasing;
+    public int Cost(TowerKind kind)
+    {
+        switch (kind)
         {
-            int count = 0;
-            if (sites != null) foreach (var site in sites) if (site != null && site.IsOccupied) count++;
-            return count;
+            case TowerKind.Arrow: return Mathf.Max(1, arrowCost);
+            case TowerKind.Frost: return Mathf.Max(1, frostCost);
+            case TowerKind.Artillery: return Mathf.Max(1, artilleryCost);
+            default: return Mathf.Max(1, mageCost);
         }
     }
-
+    public GameObject Prefab(TowerKind kind)
+    {
+        switch (kind)
+        {
+            case TowerKind.Arrow: return arrowTowerPrefab;
+            case TowerKind.Frost: return frostTowerPrefab;
+            case TowerKind.Artillery: return artilleryTowerPrefab;
+            default: return mageTowerPrefab;
+        }
+    }
+    public bool CanAfford(TowerKind kind) => game && game.CanBuild && Prefab(kind) && game.Gold >= Cost(kind);
     private void Awake()
     {
-        mageButton.onClick.AddListener(BuildMage);
-        arrowButton.onClick.AddListener(BuildArrow);
-        artilleryButton.onClick.AddListener(BuildArtillery);
-        frostButton.onClick.AddListener(BuildFrost);
-        closeButton.onClick.AddListener(Cancel);
-        RefreshButtonAvailability();
-        menu.gameObject.SetActive(false);
+        if (hudCanvas)
+        {
+            Transform oldMenu = hudCanvas.transform.Find("Tower Build Menu");
+            if (oldMenu) oldMenu.gameObject.SetActive(false);
+        }
     }
-
     private void Update()
     {
-        if (game != null && game.IsGameOver) { Cancel(); UpdateHover(null); return; }
-        Vector2 position = Vector2.zero;
-        bool hasPointer = false, click = false, cancel = false;
+        if (!IsDragging) return;
+        if (!game || !game.CanBuild || !CanAfford(DraggedKind)) { Cancel(); return; }
+        bool cancel = false;
 #if ENABLE_INPUT_SYSTEM
-        if (Mouse.current != null)
-        {
-            position = Mouse.current.position.ReadValue();
-            click = Mouse.current.leftButton.wasPressedThisFrame;
-            hasPointer = true;
-        }
-        cancel = Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame;
+        cancel = (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
+            || (Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame);
 #elif ENABLE_LEGACY_INPUT_MANAGER
-        position = Input.mousePosition;
-        click = Input.GetMouseButtonDown(0);
-        cancel = Input.GetKeyDown(KeyCode.Escape);
-        hasPointer = true;
+        cancel = Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1);
 #endif
         if (cancel) Cancel();
-        if (hasPointer)
+    }
+    private void LateUpdate() { if (IsDragging) UpdateDrag(dragPosition); }
+    private void OnDisable() { Cancel(); }
+    private void OnApplicationFocus(bool focus) { if (!focus) Cancel(); }
+    public bool BeginDrag(TowerKind kind, Vector2 screenPosition)
+    {
+        Cancel();
+        if (!CanAfford(kind)) { PlacementMessage?.Invoke("金币不足，击败敌人可获得金币"); return false; }
+        IsDragging = true;
+        DraggedKind = kind;
+        CreatePreview(kind);
+        if (sites != null) foreach (var s in sites) if (s) s.ShowPlacementHint(true);
+        PlacementMessage?.Invoke("拖到发光的空坑位 · 松手建造 · Esc / 右键取消");
+        UpdateDrag(screenPosition);
+        return true;
+    }
+    public void UpdateDrag(Vector2 screenPosition)
+    {
+        if (!IsDragging || !worldCamera) return;
+        dragPosition = screenPosition;
+        bool insideMap = worldCamera.pixelRect.Contains(screenPosition) && !IsOverUI(screenPosition);
+        BuildSite next = insideMap ? SiteAt(screenPosition) : null;
+        if (hoveredSite != next)
         {
-            UpdateHover(IsOverUI(position) ? null : SiteAt(position));
-            if (click) HandleWorldClick(position);
+            if (hoveredSite) hoveredSite.Hover(false);
+            hoveredSite = next;
+            if (hoveredSite) hoveredSite.Hover(true);
+        }
+        if (!preview) return;
+        preview.SetActive(insideMap);
+        Vector3 point = worldCamera.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, -worldCamera.transform.position.z));
+        preview.transform.position = hoveredSite
+            ? (hoveredSite.buildAnchor ? hoveredSite.buildAnchor.position : hoveredSite.transform.position)
+            : new Vector3(point.x, point.y, 0);
+        Color tint = hoveredSite && CanAfford(DraggedKind) ? new Color(0.55f, 1f, 0.72f, 0.76f) : new Color(1f, 0.42f, 0.36f, 0.6f);
+        foreach (var sprite in previewSprites) sprite.color = tint;
+        rangeRing.startColor = rangeRing.endColor = tint;
+    }
+    public bool EndDrag(Vector2 screenPosition)
+    {
+        if (!IsDragging) return false;
+        UpdateDrag(screenPosition);
+        bool built = TryPurchase(DraggedKind, hoveredSite);
+        Cancel();
+        PlacementMessage?.Invoke(built ? "建造完成 · 继续拖出卡片部署防线" : "已取消 · 只在空坑位建造，未扣金币");
+        return built;
+    }
+    public bool TryPurchase(TowerKind kind, BuildSite site)
+    {
+        if (purchasing || !site || sites == null || System.Array.IndexOf(sites, site) < 0
+            || site.IsOccupied || !CanAfford(kind)) return false;
+        purchasing = true;
+        bool spent = false, built = false;
+        int price = Cost(kind);
+        try
+        {
+            spent = game.TrySpendGold(price);
+            if (spent) built = site.TryBuild(Prefab(kind), builtTowersRoot);
+            return built;
+        }
+        finally
+        {
+            if (spent && !built) game.AddGold(price);
+            purchasing = false;
         }
     }
-
-    private void LateUpdate() { PositionMenu(); }
-
-    private bool IsOverUI(Vector2 screenPosition)
-    {
-        if (EventSystem.current == null) return false;
-        uiHits.Clear();
-        EventSystem.current.RaycastAll(new PointerEventData(EventSystem.current) { position = screenPosition }, uiHits);
-        foreach (RaycastResult hit in uiHits)
-            if (hit.module is GraphicRaycaster) return true;
-        return false;
-    }
-
-    private BuildSite SiteAt(Vector2 screenPosition)
-    {
-        if (worldCamera == null || sites == null) return null;
-        Vector3 world = worldCamera.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, -worldCamera.transform.position.z));
-        foreach (var site in sites)
-            if (site != null && !site.IsOccupied && site.clickArea != null && site.clickArea.enabled
-                && site.clickArea.OverlapPoint(world)) return site;
-        return null;
-    }
-
-    private void UpdateHover(BuildSite next)
-    {
-        if (hoveredSite == next) return;
-        if (hoveredSite != null) hoveredSite.Hover(false);
-        hoveredSite = next;
-        if (hoveredSite != null) hoveredSite.Hover(true);
-    }
-
-    public bool HandleWorldClick(Vector2 screenPosition)
-    {
-        if (game != null && game.IsGameOver) return false;
-        if (IsOverUI(screenPosition)) return false;
-        BuildSite hit = SiteAt(screenPosition);
-        if (hit == null) { Cancel(); return false; }
-        return SelectSite(hit);
-    }
-
-    public bool SelectSite(BuildSite site)
-    {
-        if (site == null || site.IsOccupied || (game != null && game.IsGameOver)) return false;
-        Cancel();
-        selectedSite = site;
-        selectedSite.Select(true);
-        menuTitle.text = "建造防御塔 · " + site.siteLabel;
-        menuHint.text = "箭塔：单体；投石：溅射；法师：穿甲；冰霜：减速";
-        RefreshButtonAvailability();
-        menu.gameObject.SetActive(true);
-        PositionMenu();
-        return true;
-    }
-
-    private void RefreshButtonAvailability()
-    {
-        mageButton.interactable = mageTowerPrefab != null;
-        frostButton.interactable = frostTowerPrefab != null;
-        arrowButton.interactable = arrowTowerPrefab != null;
-        artilleryButton.interactable = artilleryTowerPrefab != null;
-    }
-
-    public void BuildFrost() { TryBuildFrost(); }
-    public void BuildMage() { TryBuildMage(); }
-    public void BuildArrow() { TryBuildArrow(); }
-    public void BuildArtillery() { TryBuildArtillery(); }
-
-    public bool TryBuildFrost()
-    {
-        if (selectedSite == null || (game != null && game.IsGameOver)) return false;
-        if (!selectedSite.TryBuild(frostTowerPrefab, builtTowersRoot)) return false;
-        Cancel();
-        return true;
-    }
-
-    public bool TryBuildMage()
-    {
-        if (selectedSite == null || (game != null && game.IsGameOver)) return false;
-        if (!selectedSite.TryBuild(mageTowerPrefab, builtTowersRoot)) return false;
-        Cancel();
-        return true;
-    }
-
-    public bool TryBuildArrow()
-    {
-        if (selectedSite == null || (game != null && game.IsGameOver)) return false;
-        if (!selectedSite.TryBuild(arrowTowerPrefab, builtTowersRoot)) return false;
-        Cancel();
-        return true;
-    }
-
-    public bool TryBuildArtillery()
-    {
-        if (selectedSite == null || (game != null && game.IsGameOver)) return false;
-        if (!selectedSite.TryBuild(artilleryTowerPrefab, builtTowersRoot)) return false;
-        Cancel();
-        return true;
-    }
-
     public void Cancel()
     {
-        if (selectedSite != null) selectedSite.Select(false);
-        selectedSite = null;
-        if (menu != null) menu.gameObject.SetActive(false);
+        bool wasDragging = IsDragging;
+        IsDragging = false;
+        if (hoveredSite) hoveredSite.Hover(false);
+        hoveredSite = null;
+        if (sites != null) foreach (var s in sites) if (s) s.ShowPlacementHint(false);
+        if (preview) { preview.SetActive(false); Destroy(preview); }
+        preview = null;
+        if (wasDragging) PlacementMessage?.Invoke("拖动下方塔卡到空坑位，购买并建造");
     }
-
-    public void PositionMenu()
+    private bool IsOverUI(Vector2 position)
     {
-        if (!MenuOpen || selectedSite == null || worldCamera == null || hudCanvas == null) return;
-        var canvasRect = hudCanvas.transform as RectTransform;
-        Vector3 screen = worldCamera.WorldToScreenPoint(selectedSite.transform.position);
-        Vector2 local;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screen, null, out local);
-        Vector2 half = menu.rect.size * 0.5f;
-        Vector2 target = local + new Vector2(half.x + 28f, 0f);
-        Rect bounds = canvasRect.rect;
-        target.x = Mathf.Clamp(target.x, bounds.xMin + half.x + 12f, bounds.xMax - half.x - 12f);
-        target.y = Mathf.Clamp(target.y, bounds.yMin + half.y + 12f, bounds.yMax - half.y - 12f);
-        menu.anchoredPosition = target;
+        if (!EventSystem.current) return false;
+        uiHits.Clear();
+        EventSystem.current.RaycastAll(new PointerEventData(EventSystem.current) { position = position }, uiHits);
+        foreach (var hit in uiHits) if (hit.module is GraphicRaycaster) return true;
+        return false;
+    }
+    private BuildSite SiteAt(Vector2 screenPosition)
+    {
+        if (!worldCamera || sites == null) return null;
+        Vector3 world = worldCamera.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, -worldCamera.transform.position.z));
+        foreach (var site in sites)
+            if (site && !site.IsOccupied && site.clickArea && site.clickArea.enabled && site.clickArea.OverlapPoint(world)) return site;
+        return null;
+    }
+    private void CreatePreview(TowerKind kind)
+    {
+        GameObject prefab = Prefab(kind);
+        var tower = prefab.GetComponent<TowerBehaviour>();
+        preview = new GameObject("Placement Preview (visuals only)");
+        var sprites = new List<SpriteRenderer>();
+        foreach (var source in prefab.GetComponentsInChildren<SpriteRenderer>())
+        {
+            if (!source.sprite || (tower && source == tower.auraVisual)) continue;
+            var node = new GameObject(source.name);
+            node.transform.SetParent(preview.transform, false);
+            node.transform.localPosition = prefab.transform.InverseTransformPoint(source.transform.position);
+            node.transform.localRotation = Quaternion.Inverse(prefab.transform.rotation) * source.transform.rotation;
+            Vector3 scale = source.transform.lossyScale;
+            Vector3 rootScale = prefab.transform.lossyScale;
+            node.transform.localScale = new Vector3(scale.x / rootScale.x, scale.y / rootScale.y, scale.z / rootScale.z);
+            var sprite = node.AddComponent<SpriteRenderer>();
+            sprite.sprite = source.sprite;
+            sprite.sharedMaterial = source.sharedMaterial;
+            sprite.sortingLayerID = source.sortingLayerID;
+            sprite.sortingOrder = 100;
+            sprite.flipX = source.flipX;
+            sprite.flipY = source.flipY;
+            sprites.Add(sprite);
+        }
+        preview.transform.localScale = prefab.transform.localScale;
+        previewSprites = sprites.ToArray();
+        var ringNode = new GameObject("Attack Range");
+        ringNode.transform.SetParent(preview.transform, false);
+        rangeRing = ringNode.AddComponent<LineRenderer>();
+        rangeRing.useWorldSpace = false;
+        rangeRing.loop = true;
+        rangeRing.positionCount = 96;
+        rangeRing.widthMultiplier = 0.035f;
+        rangeRing.sortingOrder = 99;
+        if (sites != null) foreach (var site in sites)
+            if (site && site.selectionRing) { rangeRing.sharedMaterial = site.selectionRing.sharedMaterial; break; }
+        float radius = tower && tower.definition ? tower.definition.range : 3f;
+        for (int i = 0; i < rangeRing.positionCount; i++)
+        {
+            float angle = i * Mathf.PI * 2 / rangeRing.positionCount;
+            rangeRing.SetPosition(i, new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius);
+        }
     }
 }
