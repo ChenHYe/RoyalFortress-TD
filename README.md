@@ -12,6 +12,18 @@ Unity 2D 塔防课程协作工程。包含同学制作的地图、法师塔与�
 
 首次打开会重新生成 Library，耗时取决于网络和电脑性能。
 
+### 图二：圣林加护
+
+战斗草稿位于 `Assets/Scenes/ForestSanctuaryGameplay.unity`，已配置八个建塔位、四种塔、三路与八波敌人，以及净化脉冲。后续塔与波次平衡由相应组员继续负责，当前不标为已完成平衡验收。纯演出场景仍为 `Assets/Scenes/ForestSanctuary.unity`。见 [图二接入说明](Docs/ForestSanctuaryIntegration.md)。
+
+### 图三：亡者之门
+
+分层场景已按原亮度接入：打开 `Assets/Scenes/GateOfTheDead.unity`，点击 Play 查看人物对波、传送门、七处火炬、上下符文及四块悬石循环。左上角可预览一次封印演出。素材、预制体、接入事件和验证范围见 [图三接入说明](Docs/GateOfDeadIntegration.md)。
+
+独立照明试样：`Assets/Scenes/GateOfTheDeadLightingPilot.unity`，对照一盏橙火、一盏紫火及对波区域的局部受光与柔光。点击 Play 可切换原亮度、暮色和仅环境光，见 [照明试样说明](Docs/GateOfDeadLightingPilot.md)。
+
+新版墓域美术对照：`Assets/Scenes/GateOfTheDeadArtV2.unity`，新版枯骨、棺椁与冷雾底图叠加原有传送门、火焰、对波和符文。右上角可切换原版底图，原版关卡保留。
+
 ## 当前功能
 
 - 固定路线、7 个建塔位、三波敌人、墓穴支路和基地生命。

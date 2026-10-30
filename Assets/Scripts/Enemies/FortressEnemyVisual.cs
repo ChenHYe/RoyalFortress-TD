@@ -21,7 +21,7 @@ public sealed class FortressEnemyVisual : MonoBehaviour
             barSprite = Sprite.Create(Texture2D.whiteTexture, new Rect(0,0,Texture2D.whiteTexture.width,Texture2D.whiteTexture.height), new Vector2(0.5f,0.5f), Texture2D.whiteTexture.width);
         var root = new GameObject("Health Bar");
         root.transform.SetParent(transform, false); barRoot = root.transform;
-        barWidth = GetComponent<WaypointEnemy>().definition != null && GetComponent<WaypointEnemy>().definition.kind == FortressEnemyKind.ArmoredOrc ? 0.8f : 0.55f;
+        barWidth = GetComponent<WaypointEnemy>().definition != null && GetComponent<WaypointEnemy>().definition.kind != FortressEnemyKind.Skeleton ? 0.8f : 0.55f;
         back = MakeBar("Background", new Color(0.08f,0.05f,0.06f,0.95f), 100);
         fill = MakeBar("Health", new Color(0.3f,0.85f,0.3f), 101);
     }

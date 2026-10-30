@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum FortressEnemyKind { Skeleton, ArmoredOrc }
+public enum FortressEnemyKind { Skeleton, ArmoredOrc, RiftGuard }
 
 [CreateAssetMenu(menuName = "Royal Fortress/Enemy Definition")]
 public sealed class FortressEnemyDefinition : ScriptableObject
