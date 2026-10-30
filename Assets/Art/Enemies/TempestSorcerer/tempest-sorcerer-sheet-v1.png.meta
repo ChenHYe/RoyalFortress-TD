@@ -1,0 +1,609 @@
+fileFormatVersion: 2
+guid: 3b818a12fd5be90459c8373da8348fcb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3827593233689985693
+    second: tempest-sorcerer-sheet-v1_0
+  - first:
+      213: -3652184233988898816
+    second: tempest-sorcerer-sheet-v1_1
+  - first:
+      213: 4182124909057644914
+    second: tempest-sorcerer-sheet-v1_2
+  - first:
+      213: -6584272502338438348
+    second: tempest-sorcerer-sheet-v1_3
+  - first:
+      213: -8792521735171761394
+    second: tempest-sorcerer-sheet-v1_4
+  - first:
+      213: -4738540855519722950
+    second: tempest-sorcerer-sheet-v1_5
+  - first:
+      213: -3915119902118563191
+    second: tempest-sorcerer-sheet-v1_6
+  - first:
+      213: -8101403782506266530
+    second: tempest-sorcerer-sheet-v1_7
+  - first:
+      213: -8428627351792050917
+    second: tempest-sorcerer-sheet-v1_8
+  - first:
+      213: 7541648070099345757
+    second: tempest-sorcerer-sheet-v1_9
+  - first:
+      213: -4445404536100495794
+    second: tempest-sorcerer-sheet-v1_10
+  - first:
+      213: 1853072592460015128
+    second: tempest-sorcerer-sheet-v1_11
+  - first:
+      213: 234196122613396265
+    second: tempest-sorcerer-sheet-v1_12
+  - first:
+      213: 7285488879815074029
+    second: tempest-sorcerer-sheet-v1_13
+  - first:
+      213: -2350598949603238575
+    second: tempest-sorcerer-sheet-v1_14
+  - first:
+      213: -2403357747508304729
+    second: tempest-sorcerer-sheet-v1_15
+  - first:
+      213: -8267261484408809477
+    second: tempest-sorcerer-sheet-v1_16
+  - first:
+      213: 7250494508334735192
+    second: tempest-sorcerer-sheet-v1_17
+  - first:
+      213: 7938712409933188605
+    second: tempest-sorcerer-sheet-v1_18
+  - first:
+      213: -6155564518927852130
+    second: Tempest_south_0
+  - first:
+      213: 5807110334523307542
+    second: Tempest_south_1
+  - first:
+      213: 7132899281337947334
+    second: Tempest_south_2
+  - first:
+      213: -8589221230149399291
+    second: Tempest_south_3
+  - first:
+      213: -8935232402999755978
+    second: Tempest_east_0
+  - first:
+      213: 2576552108682413388
+    second: Tempest_east_1
+  - first:
+      213: 8073737507605015634
+    second: Tempest_east_2
+  - first:
+      213: -8599223312824971799
+    second: Tempest_east_3
+  - first:
+      213: 7465149827537908752
+    second: Tempest_north_0
+  - first:
+      213: -4260219017121407916
+    second: Tempest_north_1
+  - first:
+      213: 1780678193486542143
+    second: Tempest_north_2
+  - first:
+      213: 9184168497600762260
+    second: Tempest_north_3
+  - first:
+      213: 2776971692745900390
+    second: Tempest_west_0
+  - first:
+      213: -6607055334960710452
+    second: Tempest_west_1
+  - first:
+      213: -3499179982068792308
+    second: Tempest_west_2
+  - first:
+      213: -6902500884940754129
+    second: Tempest_west_3
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 120.57693
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Tempest_south_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 943
+        width: 313
+        height: 311
+      alignment: 9
+      pivot: {x: 0.55, y: 0.054}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9d9e410faa039aa0800000000000000
+      internalID: -6155564518927852130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tempest_south_1
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 943
+        width: 313
+        height: 311
+      alignment: 9
+      pivot: {x: 0.55, y: 0.054}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 616f2c4f410079050800000000000000
+      internalID: 5807110334523307542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tempest_south_2
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 943
+        width: 313
+        height: 311
+      alignment: 9
+      pivot: {x: 0.55, y: 0.054}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c499caca162df260800000000000000
+      internalID: 7132899281337947334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tempest_south_3
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 943
+        width: 313
+        height: 311
+      alignment: 9
+      pivot: {x: 0.55, y: 0.054}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50d83bf7cc4fcc880800000000000000
+      internalID: -8589221230149399291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tempest_east_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 640
+        width: 313
+        height: 303
+      alignment: 9
+      pivot: {x: 0.68, y: 0.065}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63bb3a9687daff380800000000000000
+      internalID: -8935232402999755978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tempest_east_1
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 640
+        width: 313
+        height: 303
+      alignment: 9
+      pivot: {x: 0.68, y: 0.065}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c458c4fdd70c1c320800000000000000
+      internalID: 2576552108682413388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tempest_east_2
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 640
+        width: 313
+        height: 303
+      alignment: 9
+      pivot: {x: 0.68, y: 0.065}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25c6b869c7dab0070800000000000000
+      internalID: 8073737507605015634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tempest_east_3
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 640
+        width: 313
+        height: 303
+      alignment: 9
+      pivot: {x: 0.68, y: 0.065}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ed4fc625fb69a880800000000000000
+      internalID: -8599223312824971799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tempest_north_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 334
+        width: 313
+        height: 306
+      alignment: 9
+      pivot: {x: 0.53, y: 0.042}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0143771573a899760800000000000000
+      internalID: 7465149827537908752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tempest_north_1
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 334
+        width: 313
+        height: 306
+      alignment: 9
+      pivot: {x: 0.53, y: 0.042}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45c5d132069a0e4c0800000000000000
+      internalID: -4260219017121407916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tempest_north_2
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 334
+        width: 313
+        height: 306
+      alignment: 9
+      pivot: {x: 0.53, y: 0.042}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f35bc0ee16d36b810800000000000000
+      internalID: 1780678193486542143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tempest_north_3
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 334
+        width: 313
+        height: 306
+      alignment: 9
+      pivot: {x: 0.53, y: 0.042}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49193d8b698b47f70800000000000000
+      internalID: 9184168497600762260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tempest_west_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 313
+        height: 334
+      alignment: 9
+      pivot: {x: 0.45, y: 0.13}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6614f61aa09c98620800000000000000
+      internalID: 2776971692745900390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tempest_west_1
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 0
+        width: 313
+        height: 334
+      alignment: 9
+      pivot: {x: 0.45, y: 0.13}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ccc3154bd260f44a0800000000000000
+      internalID: -6607055334960710452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tempest_west_2
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 0
+        width: 313
+        height: 334
+      alignment: 9
+      pivot: {x: 0.45, y: 0.13}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c04c1a3885a607fc0800000000000000
+      internalID: -3499179982068792308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tempest_west_3
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 0
+        width: 313
+        height: 334
+      alignment: 9
+      pivot: {x: 0.45, y: 0.13}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f23794324046530a0800000000000000
+      internalID: -6902500884940754129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Tempest_east_0: -8935232402999755978
+      Tempest_east_1: 2576552108682413388
+      Tempest_east_2: 8073737507605015634
+      Tempest_east_3: -8599223312824971799
+      Tempest_north_0: 7465149827537908752
+      Tempest_north_1: -4260219017121407916
+      Tempest_north_2: 1780678193486542143
+      Tempest_north_3: 9184168497600762260
+      Tempest_south_0: -6155564518927852130
+      Tempest_south_1: 5807110334523307542
+      Tempest_south_2: 7132899281337947334
+      Tempest_south_3: -8589221230149399291
+      Tempest_west_0: 2776971692745900390
+      Tempest_west_1: -6607055334960710452
+      Tempest_west_2: -3499179982068792308
+      Tempest_west_3: -6902500884940754129
+      tempest-sorcerer-sheet-v1_0: -3827593233689985693
+      tempest-sorcerer-sheet-v1_1: -3652184233988898816
+      tempest-sorcerer-sheet-v1_10: -4445404536100495794
+      tempest-sorcerer-sheet-v1_11: 1853072592460015128
+      tempest-sorcerer-sheet-v1_12: 234196122613396265
+      tempest-sorcerer-sheet-v1_13: 7285488879815074029
+      tempest-sorcerer-sheet-v1_14: -2350598949603238575
+      tempest-sorcerer-sheet-v1_15: -2403357747508304729
+      tempest-sorcerer-sheet-v1_16: -8267261484408809477
+      tempest-sorcerer-sheet-v1_17: 7250494508334735192
+      tempest-sorcerer-sheet-v1_18: 7938712409933188605
+      tempest-sorcerer-sheet-v1_2: 4182124909057644914
+      tempest-sorcerer-sheet-v1_3: -6584272502338438348
+      tempest-sorcerer-sheet-v1_4: -8792521735171761394
+      tempest-sorcerer-sheet-v1_5: -4738540855519722950
+      tempest-sorcerer-sheet-v1_6: -3915119902118563191
+      tempest-sorcerer-sheet-v1_7: -8101403782506266530
+      tempest-sorcerer-sheet-v1_8: -8428627351792050917
+      tempest-sorcerer-sheet-v1_9: 7541648070099345757
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

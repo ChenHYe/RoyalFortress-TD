@@ -29,6 +29,7 @@ namespace RoyalFortress.ForestSanctuary
         public bool showControls = true;
         public bool simulationControlsEnabled = true;
         public bool paused;
+        public bool interactionEnabled = true;
         public UnityEvent onPurificationPulse = new UnityEvent();
         public UnityEvent onBlessingCompleted = new UnityEvent();
         public event Action StateChanged;
@@ -44,7 +45,7 @@ namespace RoyalFortress.ForestSanctuary
         public int CompletionCount { get; private set; }
         public RitualStage Stage { get; private set; }
         public float RitualProgress => CompletedWaves / (float)TotalWaves;
-        public bool CanReleasePulse => Stage == RitualStage.Channeling && HomeLives > 0 && StoredPulse > 0;
+        public bool CanReleasePulse => interactionEnabled && Stage == RitualStage.Channeling && HomeLives > 0 && StoredPulse > 0;
         public bool AutoDemonstration { get; private set; }
         private float autoTime;
         private Font uiFont;

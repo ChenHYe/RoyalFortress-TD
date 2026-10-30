@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using KingdomBorder.TwinTowers;
@@ -26,8 +27,10 @@ namespace RoyalFortress.ForestSanctuary
         public int LastPulseHitCount { get; private set; }
         public float LastPulseDamage { get; private set; }
         private bool stoppedBuilding;
-        private void Start()
+        private IEnumerator Start()
         {
+            while (!hud.IsReady) yield return null;
+            RestoreRitualControls();
             presentation.showControls = false;
             presentation.simulationControlsEnabled = false;
             game.StateChanged += Refresh;
@@ -37,6 +40,21 @@ namespace RoyalFortress.ForestSanctuary
             pulseButton.onClick.AddListener(ReleasePulse);
             routeButton.onClick.AddListener(ToggleRoutes);
             routeOverlay.SetActive(false); Refresh();
+        }
+        private void RestoreRitualControls()
+        {
+            PlaceSupplement(ritualText.transform.parent.gameObject,new Vector2(18,-57),new Vector2(278,48));
+            PlaceSupplement(pulseButton.gameObject,new Vector2(18,-112),new Vector2(278,54));
+            PlaceSupplement(pulseHint.transform.parent.gameObject,new Vector2(18,-173),new Vector2(278,62));
+            pulseHint.rectTransform.sizeDelta=new Vector2(252,54);pulseHint.fontSize=14;
+            PlaceSupplement(routeButton.gameObject,new Vector2(18,-242),new Vector2(142,40));
+        }
+        private void PlaceSupplement(GameObject control,Vector2 position,Vector2 size)
+        {
+            var rect=control.GetComponent<RectTransform>();rect.SetParent(hud.ExtraControlsRoot,false);
+            rect.anchorMin=rect.anchorMax=rect.pivot=Vector2.up;rect.anchoredPosition=position;rect.sizeDelta=size;
+            foreach(var label in control.GetComponentsInChildren<Text>(true))label.font=hud.lifeText.font;
+            control.SetActive(true);
         }
         public void ReleasePulse() { presentation.TryReleasePulse(); }
         public void ToggleRoutes()
@@ -73,6 +91,7 @@ namespace RoyalFortress.ForestSanctuary
         private void Refresh()
         {
             if (game == null || presentation == null) return;
+            presentation.interactionEnabled = !game.IsPaused;
             Failed = game.IsGameOver || presentation.Stage == ForestSanctuaryPresentation.RitualStage.Interrupted;
             VictoryStarted = presentation.Stage == ForestSanctuaryPresentation.RitualStage.Completing || presentation.Stage == ForestSanctuaryPresentation.RitualStage.Blessed;
             if (Failed || VictoryStarted) StopBuildingAndTowers();
@@ -82,9 +101,9 @@ namespace RoyalFortress.ForestSanctuary
             int next = presentation.CompletedWaves < 2 ? 2 : presentation.CompletedWaves < 4 ? 4 : presentation.CompletedWaves < 6 ? 6 : 0;
             pulseHint.text = Failed ? "祭坛失守，可重新挑战" : VictoryFinished ? "水晶力量已传给勇者" : VictoryStarted ? "水晶力量转移中…" :
                 presentation.CanReleasePulse ? "点击按钮或水晶：中央范围伤害并短暂减速" : next > 0 ? "守住第 " + next + " 波后补充一次，最多储存一次" : "守住最后一波，完成加护";
-            if (Failed) { hud.statusText.text = "祭坛失守 · 仪式中断"; hud.buttonText.text = "重新开始"; hud.waveButton.interactable = true; }
-            else if (VictoryStarted && !VictoryFinished) { hud.statusText.text = "防守成功 · 正在完成加护"; hud.buttonText.text = "仪式完成中…"; hud.waveButton.interactable = false; }
-            else if (VictoryFinished) { hud.statusText.text = "获得圣林加护 · 防守成功"; hud.buttonText.text = "重新开始"; hud.waveButton.interactable = true; }
+            if (Failed) hud.SetEncounterMessage("祭坛失守 · 仪式中断", "重新开始", true);
+            else if (VictoryStarted && !VictoryFinished) hud.SetEncounterMessage("防守成功 · 正在完成加护", "仪式完成中…", false);
+            else if (VictoryFinished) hud.SetEncounterMessage("获得圣林加护 · 防守成功", "重新开始", true);
         }
         private void FinishVictory() { if (Failed || !game.AllWavesFinished || game.Lives<=0) return; VictoryFinished=true; Refresh(); }
         private void OnDestroy()

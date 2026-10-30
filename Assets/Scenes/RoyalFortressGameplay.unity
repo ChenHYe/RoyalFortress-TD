@@ -5935,6 +5935,10 @@ MonoBehaviour:
   - {fileID: 1093186957}
   - {fileID: 2032204548}
   mageTowerPrefab: {fileID: 3245014155602382550, guid: 8aad2dd2764c40445808dcbe80e22d13, type: 3}
+  arrowCost: 90
+  frostCost: 110
+  mageCost: 140
+  artilleryCost: 160
   frostTowerPrefab: {fileID: 6108834534539051913, guid: ef8d9cb951a9f1a4fab84acc8b2e8667, type: 3}
   arrowTowerPrefab: {fileID: 3245014155602382560, guid: 5e4819bdeb8c4f26b6bee7c1230ad284, type: 3}
   artilleryTowerPrefab: {fileID: 3245014155602382561, guid: 6255a2351a264fa7a398a13fb17c2a5b, type: 3}
@@ -8697,7 +8701,8 @@ MonoBehaviour:
   minimumSize: 3
   maximumSize: 8
   startSize: 8
-  zoomSpeed: 0.16
+  zoomSpeed: 1.4
+  zoomResponse: 24
   keyboardSpeed: 8
 --- !u!81 &1810339770
 AudioListener:
@@ -9859,6 +9864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveGameController
   startingLives: 20
+  startingGold: 300
   branchUnlockWave: 3
   routeA: {fileID: 2072813231}
   routeB: {fileID: 677051565}

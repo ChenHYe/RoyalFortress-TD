@@ -19,4 +19,5 @@ MonoBehaviour:
   armorPercent: 60
   speed: 0.72
   baseDamage: 2
+  goldReward: 40
   walkAnimationPrefix: Orc_Walk_

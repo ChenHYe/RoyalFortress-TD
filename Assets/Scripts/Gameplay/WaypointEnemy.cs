@@ -17,10 +17,12 @@ public sealed class WaypointEnemy : MonoBehaviour
     private bool resolved;
     private float traveled, totalLength;
     public bool Resolved => resolved;
+    public WaveGameController Owner => game;
     public string RouteName { get; private set; }
     public int NextPointIndex => nextPoint;
     public EnemyAgent Combat => combat;
     public int BaseDamage => definition != null ? Mathf.Max(1, definition.baseDamage) : 1;
+    public int GoldReward => definition != null ? Mathf.Max(0, definition.goldReward) : 18;
     public string DisplayName => definition != null ? definition.displayName : "骷髅兵";
 
     public void Initialize(WaveGameController owner, WaypointPath path)
@@ -51,7 +53,7 @@ public sealed class WaypointEnemy : MonoBehaviour
     {
         if (game != null && !game.IsGameOver && combat != null && combat.IsAlive)
         {
-            animationPlayer.speed = combat.SpeedMultiplier;
+            animationPlayer.speed = combat.SpeedMultiplier * WorldCombatModifiers.EnemyMovementSpeed;
             Advance(combat.CurrentSpeed * Time.deltaTime);
         }
     }

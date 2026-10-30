@@ -18,7 +18,7 @@ namespace KingdomBorder.TwinTowers
         public float Health { get; private set; }
         public bool IsAlive { get { return !finished && Health > 0 && isActiveAndEnabled; } }
         public float Progress { get; private set; }
-        public float CurrentSpeed { get { return Mathf.Max(0, baseSpeed) * SpeedMultiplier; } }
+        public float CurrentSpeed { get { return Mathf.Max(0, baseSpeed) * SpeedMultiplier * WorldCombatModifiers.EnemyMovementSpeed; } }
         public float SpeedMultiplier
         {
             get

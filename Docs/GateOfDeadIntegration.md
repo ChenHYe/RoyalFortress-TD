@@ -1,6 +1,8 @@
 # 图三：亡者之门分层场景
 
-新增美术对照场景 `Assets/Scenes/GateOfTheDeadArtV2.unity`：新版枯骨墓域底图与原有动画组合。Play 模式右上角可切换「新版底图 / 原版对照」。部分火盆实体在新图中被省略，五处紫火动画仍按原位置保留。以下说明继续对应原版场景。
+可玩入口为 `Assets/Scenes/GateOfTheDeadGameplay.unity`：新版枯骨墓域底图已接回现有十个塔位、七波与三路，沿用金币、拖卡建塔和暂停系统。三处补充火盆及火焰复制了美术对照场景中保存的位置，并分别放在 `Necropolis Environment Props / Purple Brazier 3～5` 下，可以移动整个组合。
+
+美术对照场景 `Assets/Scenes/GateOfTheDeadArtV2.unity` 保留，Play 模式右上角可切换「新版底图 / 原版对照」。以下说明继续对应原版分层演出场景。
 
 使用项目版本 Unity 6000.3.27f1。按当前确定的**原亮度**接入，所有精灵使用 Unlit 材质和白色 Tint。
 

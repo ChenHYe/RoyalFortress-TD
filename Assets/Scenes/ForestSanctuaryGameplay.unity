@@ -5402,7 +5402,8 @@ MonoBehaviour:
   minimumSize: 2
   maximumSize: 8
   startSize: 8
-  zoomSpeed: 0.16
+  zoomSpeed: 1.4
+  zoomResponse: 24
   keyboardSpeed: 8
 --- !u!81 &1148570821
 AudioListener:
@@ -5539,14 +5540,10 @@ MonoBehaviour:
   artilleryTowerPrefab: {fileID: 3245014155602382561, guid: 6255a2351a264fa7a398a13fb17c2a5b, type: 3}
   builtTowersRoot: {fileID: 10299450}
   hudCanvas: {fileID: 1414760537}
-  menu: {fileID: 67910407}
-  menuTitle: {fileID: 388289851}
-  menuHint: {fileID: 320577967}
-  mageButton: {fileID: 282234155}
-  arrowButton: {fileID: 785551281}
-  artilleryButton: {fileID: 1958688873}
-  frostButton: {fileID: 534800677}
-  closeButton: {fileID: 508467761}
+  arrowCost: 90
+  frostCost: 110
+  mageCost: 140
+  artilleryCost: 160
 --- !u!114 &1169317089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7774,13 +7771,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a1b6bb4b90946545bfc6a8750d8c9e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveGameController
+  levelName: "\u5723\u6797\u52A0\u62A4"
+  homeDisplayName: "\u796D\u575B"
+  branchDisplayName: "\u4E0B\u8DEF"
+  preparationHint: "\u90E8\u7F72\u9632\u7EBF"
   startingLives: 20
+  startingGold: 300
   branchUnlockWave: 5
   routeA: {fileID: 158858578}
   routeB: {fileID: 361053780}
   routeC: {fileID: 138198154}
   enemyPrefab: {fileID: 4178104704550137787, guid: ce0e3bc10064c4a4ebf52fd8b29377a7, type: 3}
   orcPrefab: {fileID: 4178104704550137787, guid: bddff42ffedb5d641a5a09aadfa23701, type: 3}
+  bossPrefab: {fileID: 0}
   enemiesRoot: {fileID: 108581137}
   waves:
   - displayName: "\u6797\u9053\u8BD5\u63A2"
@@ -7805,6 +7808,9 @@ MonoBehaviour:
     orcsA: 0
     orcsB: 0
     orcsC: 0
+    bossesA: 0
+    bossesB: 0
+    bossesC: 0
     spawnInterval: 0.9
   - displayName: "\u4E24\u4FA7\u9A9A\u6270"
     groups:
@@ -7828,6 +7834,9 @@ MonoBehaviour:
     orcsA: 0
     orcsB: 0
     orcsC: 0
+    bossesA: 0
+    bossesB: 0
+    bossesC: 0
     spawnInterval: 0.9
   - displayName: "\u91CD\u7532\u524D\u950B"
     groups:
@@ -7858,6 +7867,9 @@ MonoBehaviour:
     orcsA: 0
     orcsB: 0
     orcsC: 0
+    bossesA: 0
+    bossesB: 0
+    bossesC: 0
     spawnInterval: 0.9
   - displayName: "\u4EA4\u9519\u8FDB\u653B"
     groups:
@@ -7895,6 +7907,9 @@ MonoBehaviour:
     orcsA: 0
     orcsB: 0
     orcsC: 0
+    bossesA: 0
+    bossesB: 0
+    bossesC: 0
     spawnInterval: 0.9
   - displayName: "\u5357\u8DEF\u6765\u654C"
     groups:
@@ -7932,6 +7947,9 @@ MonoBehaviour:
     orcsA: 0
     orcsB: 0
     orcsC: 0
+    bossesA: 0
+    bossesB: 0
+    bossesC: 0
     spawnInterval: 0.9
   - displayName: "\u4E09\u8DEF\u5305\u56F4"
     groups:
@@ -7976,6 +7994,9 @@ MonoBehaviour:
     orcsA: 0
     orcsB: 0
     orcsC: 0
+    bossesA: 0
+    bossesB: 0
+    bossesC: 0
     spawnInterval: 0.9
   - displayName: "\u62A4\u536B\u7A81\u51FB"
     groups:
@@ -8020,6 +8041,9 @@ MonoBehaviour:
     orcsA: 0
     orcsB: 0
     orcsC: 0
+    bossesA: 0
+    bossesB: 0
+    bossesC: 0
     spawnInterval: 0.9
   - displayName: "\u6700\u540E\u52A0\u62A4"
     groups:
@@ -8071,10 +8095,10 @@ MonoBehaviour:
     orcsA: 0
     orcsB: 0
     orcsC: 0
+    bossesA: 0
+    bossesB: 0
+    bossesC: 0
     spawnInterval: 0.9
-  homeDisplayName: "\u796D\u575B"
-  branchDisplayName: "\u4E0B\u8DEF"
-  preparationHint: "\u70B9\u51FB\u77F3\u53F0\u5EFA\u5854 \xB7 \u4E0B\u8DEF\u7B2C5\u6CE2\u52A0\u5165"
 --- !u!114 &1406974267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8178,8 +8202,8 @@ MonoBehaviour:
   waveText: {fileID: 1178165030}
   statusText: {fileID: 106910827}
   branchText: {fileID: 1317409961}
-  waveButton: {fileID: 733466327}
   buttonText: {fileID: 436946350}
+  waveButton: {fileID: 733466327}
 --- !u!114 &1414760539
 MonoBehaviour:
   m_ObjectHideFlags: 0

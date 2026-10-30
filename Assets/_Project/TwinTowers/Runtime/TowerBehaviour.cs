@@ -14,12 +14,12 @@ namespace KingdomBorder.TwinTowers
         public int AuraEntries { get; private set; }
         public int AffectedCount { get { return affected.Count; } }
         public EnemyAgent Target { get; private set; }
-        private float nextShot;
+        private float attackCooldown;
         private readonly HashSet<EnemyAgent> affected = new HashSet<EnemyAgent>();
         private readonly HashSet<EnemyAgent> seen = new HashSet<EnemyAgent>();
         private readonly List<EnemyAgent> sweep = new List<EnemyAgent>();
 
-        public void ResetCombat() { ClearAura(); nextShot = 0; ShotsFired = AuraEntries = 0; Target = null; }
+        public void ResetCombat() { ClearAura(); attackCooldown = 0; ShotsFired = AuraEntries = 0; Target = null; }
         private void OnDisable() { ClearAura(); if (auraVisual) auraVisual.gameObject.SetActive(false); }
         private void Update()
         {
@@ -29,13 +29,14 @@ namespace KingdomBorder.TwinTowers
             ClearAura();
             if (auraVisual) auraVisual.gameObject.SetActive(false);
             if (!projectilePrefab || Time.timeScale <= 0) { Target = null; return; }
+            attackCooldown = Mathf.Max(0, attackCooldown - Time.deltaTime * WorldCombatModifiers.TowerAttackSpeed);
             Target = FindTarget();
-            if (!Target || Time.time < nextShot) return;
+            if (!Target || attackCooldown > 0) return;
             Vector3 spawn = muzzle ? muzzle.position : transform.position;
             MagicProjectile shot = Instantiate(projectilePrefab, spawn, Quaternion.identity);
             shot.Launch(Target, definition, GetInstanceID());
             ShotsFired++;
-            nextShot = Time.time + Mathf.Max(0.05f, definition.attackInterval);
+            attackCooldown = Mathf.Max(0.05f, definition.attackInterval);
         }
         private void UpdateAura()
         {

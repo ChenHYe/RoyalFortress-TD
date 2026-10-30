@@ -41,9 +41,7 @@ namespace RoyalFortress.GateOfDead
                 VictoryStarted = true;
                 presentation.PlaySealingSequence();
                 StopBuildingAndTowers();
-                hud.statusText.text = "净化力量推进 · 正在封印";
-                hud.buttonText.text = "封印中…";
-                hud.waveButton.interactable = false;
+                hud.SetEncounterMessage("净化力量推进 · 正在封印", "封印中…", false);
             }
         }
         private void StopBuildingAndTowers()
@@ -56,9 +54,7 @@ namespace RoyalFortress.GateOfDead
         {
             if (!VictoryStarted || failed) return;
             VictoryFinished = true;
-            hud.statusText.text = "封印完成 · 亡者之门已关闭";
-            hud.buttonText.text = "重新开始";
-            hud.waveButton.interactable = true;
+            hud.SetEncounterMessage("封印完成 · 亡者之门已关闭", "重新开始", true);
         }
         private void OnDestroy()
         {

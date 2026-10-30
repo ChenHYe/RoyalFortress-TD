@@ -19,4 +19,5 @@ MonoBehaviour:
   armorPercent: 15
   speed: 1.25
   baseDamage: 1
+  goldReward: 18
   walkAnimationPrefix: Skeleton_Walk_
